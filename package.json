@@ -10,6 +10,9 @@
   "devDependencies": {
     "love-typescript-definitions": "^0.20.1",
     "lua-types": "^2.8.0"
-    
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxiy01/tstl-anim8.git"
   }
 }

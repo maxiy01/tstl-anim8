@@ -1,0 +1,15 @@
+{
+  "name": "tstl-anim8",
+  "version": "0.0.0",
+  "description": "Declarations for anim8 for use with TypeScriptToLua.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC",
+  "types": "index.d.ts",
+  "devDependencies": {
+    "love-typescript-definitions": "^0.20.1",
+    "lua-types": "^2.8.0"
+    
+  }
+}

@@ -99,7 +99,7 @@ declare module "anim8"
          * 
          * @returns an array of quads from requested coordinates
          */
-        (...coordinates: (number | string)[]): Quad[];
+        (this:void, ...coordinates: (number | string)[]): Quad[];
     }
 
     /**

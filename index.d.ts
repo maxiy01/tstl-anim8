@@ -1,3 +1,4 @@
+/** @noResolution */
 declare module "anim8"
 {
     class Animation

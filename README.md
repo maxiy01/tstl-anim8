@@ -1,4 +1,4 @@
-# TSTL Roomy
+# TSTL anim8
 
 Declarations for [anim8](https://github.com/kikito/anim8), a small animation library for LÖVE.
 

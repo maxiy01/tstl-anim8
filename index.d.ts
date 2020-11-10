@@ -40,7 +40,7 @@ declare module "anim8"
          */
         pause(): void;
         /**
-         * Unpause curretn animation
+         * Unpause current animation
          */
         resume(): void;
         /**

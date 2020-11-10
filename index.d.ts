@@ -1,3 +1,6 @@
+declare type Texture = import("love.graphics").Texture;
+declare type Quad = import("love.graphics").Quad;
+
 /** @noResolution */
 declare module "anim8"
 {

@@ -69,6 +69,7 @@ declare module "anim8"
         draw(spritesheet: Texture, x?: number, y?: number, r?: number, sx?: number, sy?: number, ox?: number, oy?: number, kx?: number, ky?: number): void;
         /**
          * Returns the width and height of the current frame of the animation. This method assumes the frames passed to the animation are all quads (like the ones created by a grid).
+         * @tupleReturn
          * @returns width and height of the current frame of the animation 
          */
         getDimensions(): [number, number];

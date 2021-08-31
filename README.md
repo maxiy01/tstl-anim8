@@ -47,7 +47,7 @@ Make sure to append `";./node_modules/?/?.lua"` to your `package.path` in a _con
 package.path += ";./node_modules/?/?.lua";
 ```
 
-Also you need to add `"typescript-to-lua/language-extensions"` in _tsconfig.json_ file.
+Also you need to add `"typescript-to-lua/language-extensions"` to _tsconfig.json_ file.
 ```json
 {
     "compilerOptions": {

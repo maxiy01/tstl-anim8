@@ -2,10 +2,23 @@
 declare module "anim8"
 {
     import {Texture} from "love.graphics";
-    import {Quad} from "love.graphics";
+    import { Quad } from "love.graphics";
+    import { Transform } from "love.math";
+
 
     class Animation
     {
+        frames: Quad[];
+        durations: number[];
+        intervals: number[];
+        totalDuration: number;
+        onLoop: (this: void, self?: Animation, loops?: number) => void;
+        timer: number;
+        position: number;
+        status: "playing" | "paused";
+        flippedH: boolean;
+        flippedV: boolean;
+
         /**
          * Creates a new animation identical to the current one. The only difference is that its internal counter is reset to 0 (it's on the first frame).
          * 
@@ -55,7 +68,7 @@ declare module "anim8"
         /**
          * Draws the current frame in the specified coordinates with the right angle, scale, offset & shearing. These parameters work exactly the same way as in `love.graphics.draw`. The only difference is that they are properly recalculated when the animation is flipped horizontally, vertically or both. See `getFrameInfo` below for more details.
          * 
-         * @param spritesheet image, where all frames of animation is stored
+         * @param spritesheet A Texture (Image or Canvas) to texture the Quad with.
          * @param x The position to draw the object (x-axis). Default is 0.
          * @param y The position to draw the object (y-axis). Default is 0.
          * @param r Orientation (angle in radians). Default is 0.
@@ -68,11 +81,46 @@ declare module "anim8"
          */
         draw(spritesheet: Texture, x?: number, y?: number, r?: number, sx?: number, sy?: number, ox?: number, oy?: number, kx?: number, ky?: number): void;
         /**
+         * Draws the current frame in the specified coordinates with the right angle, scale, offset & shearing. These parameters work exactly the same way as in `love.graphics.draw`. The only difference is that they are properly recalculated when the animation is flipped horizontally, vertically or both. See `getFrameInfo` below for more details.
+         * 
+         * @param spritesheet A Texture (Image or Canvas) to texture the Quad with.
+         * @param transform Transformation object.
+         */
+        draw(spritesheet: Texture, transform: Transform): void;
+        /**
          * Returns the width and height of the current frame of the animation. This method assumes the frames passed to the animation are all quads (like the ones created by a grid).
          *
          * @returns width and height of the current frame of the animation 
          */
         getDimensions(): LuaMultiReturn <[number, number]>;
+        /**
+         * Moves the animation to its last frame and then pauses it.
+         */
+        pauseAtEnd(): void;
+        /**
+         * Moves the animation to its first frame and then pauses it.
+         */
+        pauseAtStart(): void;
+        /**
+         * This function returns the parameters that would be passed to `love.graphics.draw` when drawing this animation: `frame, x, y, r, sx, sy, ox, oy, kx, ky`.
+         * @param x The position to draw the object (x-axis). Default is 0.
+         * @param y The position to draw the object (y-axis). Default is 0.
+         * @param r Orientation (angle in radians). Default is 0.
+         * @param sx Scale factor (x-axis). Default is 1.
+         * @param sy Scale factor (y-axis). Default is equal to `sx`
+         * @param ox Origin offset (x-axis). Default is 0.
+         * @param oy Origin offset (y-axis). Default is 0.
+         * @param kx Shearing factor (x-axis). Default is 0.
+         * @param ky Shearing factor (x-axis). Default is 0.
+         * @returns `frame, x, y, r, sx, sy, ox, oy, kx, ky`
+         */
+        getFrameInfo(x: number, y: number, r?: number, sx?: number, sy?: number, ox?: number, oy?: number, kx?: number, ky?: number): LuaMultiReturn<[Quad, number, number, number, number, number, number, number, number, number]>
+        /**
+         * This functions returns the parameters that would be passed to `love.graphics.draw` when drawing this animation: `frame, transform`.
+         * @param transform Transformation object.
+         * @returns `frame, transform`
+         */
+        getFrameInfo(transform: Transform): LuaMultiReturn<[Quad, Transform]>;
     }
 
     interface Grid
@@ -104,7 +152,7 @@ declare module "anim8"
          * 
          * @returns an array of quads from requested coordinates
          */
-        (this:void, ...coordinates: (number | string)[]): Quad[];
+        (this: void, ...coordinates: (number | string)[]): Quad[];
     }
 
     /**

@@ -12,7 +12,7 @@ declare module "anim8"
         durations: number[];
         intervals: number[];
         totalDuration: number;
-        onLoop: (this: void, self?: Animation, loops?: number) => void;
+        onLoop: (this: void, self: Animation, loops: number) => void;
         timer: number;
         position: number;
         status: "playing" | "paused";
@@ -178,5 +178,5 @@ declare module "anim8"
      * @param durations a number or a table. When it's a number, it represents the duration of all frames in the animation. When it's a table, it can represent different durations for different frames. You can specify durations for all frames individually, like this: `{0.1, 0.5, 0.1}` or you can specify durations for ranges of frames: `{['3-5']=0.2}`.
      * @param onLoop  optional parameter which can be a function or a string representing one of the animation methods. It does nothing by default. If specified, it will be called every time an animation "loops". It will have two parameters: the animation instance, and how many loops have been elapsed. The most usual value (apart from none) is the string 'pauseAtEnd'. It will make the animation loop once and then pause and stop on the last frame 
      */
-    function newAnimation(this: void, frames: Quad[], durations: number[] | {[key in number|string]: number}, onLoop?: (this: void, self?: Animation, loops_number?: number) => any | string): Animation;
+    function newAnimation(this: void, frames: Quad[], durations: number[] | {[key in number|string]: number}, onLoop?: (this: void, self: Animation, loops_number: number) => any | string): Animation;
 }
